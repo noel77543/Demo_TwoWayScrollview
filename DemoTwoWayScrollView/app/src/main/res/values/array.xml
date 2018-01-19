@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="data">
+        <item>Steven</item>
+        <item>Curry</item>
+        <item>Durant</item>
+        <item>James</item>
+        <item>Hardon</item>
+        <item>Westbook</item>
+        <item>Luis</item>
+        <item>QQ</item>
+        <item>Valks</item>
+        <item>McGee</item>
+        <item>Dwight</item>
+        <item>Haward</item>
+        <item>Ruken</item>
+        <item>Rudy</item>
+        <item>Camry</item>
+        <item>Liza</item>
+        <item>Dokby</item>
+        <item>WW</item>
+        <item>Rusul</item>
+        <item>AA</item>
+        <item>Cse2</item>
+        <item>Ver</item>
+        <item>Blues</item>
+    </string-array>
+</resources>

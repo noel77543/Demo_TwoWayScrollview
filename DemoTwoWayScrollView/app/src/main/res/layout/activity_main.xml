@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/header_style"
+            android:text="球員" />
+
+        <tw.com.noel.demotwowayscrollview.util.MemberRecyclerView
+            android:id="@+id/recyclerview_member"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <tw.com.noel.demotwowayscrollview.util.CustomHorizontalScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_position"
+                        style="@style/item_style"
+                        android:text="GS"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tv_time"
+                        style="@style/item_style"
+                        android:text="MIN"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tv_grades"
+                        style="@style/item_style"
+                        android:text="FGM-A"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tv_rebound"
+                        style="@style/item_style"
+                        android:text="%"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tv_assits"
+                        style="@style/item_style"
+                        android:text="3PM-A"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tv_steals"
+                        style="@style/item_style"
+                        android:text="%"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tv_block"
+                        style="@style/item_style"
+                        android:text="FTM-A"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tv_blocked"
+                        style="@style/item_style"
+                        android:text="%"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tv_shooting_success"
+                        style="@style/item_style"
+                        android:text="OFF"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tv_shooting_total"
+                        style="@style/item_style"
+                        android:text="DFF"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tv_shooting_percentage"
+                        style="@style/item_style"
+                        android:text="TOT"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tv_three_grades_success"
+                        style="@style/item_style"
+                        android:text="AST"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tv_three_grades_total"
+                        style="@style/item_style"
+                        android:text="ST"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tv_three_grades_percentage"
+                        style="@style/item_style"
+                        android:text="BS"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tv_penalty_shot_success"
+                        style="@style/item_style"
+                        android:text="TO"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tv_penalty_shot_total"
+                        style="@style/item_style"
+                        android:text="PF"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tv_penalty_shot_percentage"
+                        style="@style/item_style"
+                        android:text="PTS"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <tw.com.noel.demotwowayscrollview.util.StatusRecyclerView
+                    android:id="@+id/recyclerview_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
+        </tw.com.noel.demotwowayscrollview.util.CustomHorizontalScrollView>
+    </LinearLayout>
+</LinearLayout>

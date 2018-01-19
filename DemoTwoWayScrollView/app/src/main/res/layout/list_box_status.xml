@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/tv_position"
+        style="@style/item_style" />
+
+    <TextView
+        android:id="@+id/tv_time"
+        style="@style/item_style" />
+
+    <TextView
+        android:id="@+id/tv_grades"
+        style="@style/item_style" />
+
+    <TextView
+        android:id="@+id/tv_rebound"
+        style="@style/item_style" />
+
+    <TextView
+        android:id="@+id/tv_assits"
+        style="@style/item_style" />
+
+    <TextView
+        android:id="@+id/tv_steals"
+        style="@style/item_style" />
+
+    <TextView
+        android:id="@+id/tv_block"
+        style="@style/item_style" />
+
+    <TextView
+        android:id="@+id/tv_blocked"
+        style="@style/item_style" />
+
+    <TextView
+        android:id="@+id/tv_shooting_success"
+        style="@style/item_style" />
+
+    <TextView
+        android:id="@+id/tv_shooting_total"
+        style="@style/item_style" />
+
+    <TextView
+        android:id="@+id/tv_shooting_percentage"
+        style="@style/item_style" />
+
+    <TextView
+        android:id="@+id/tv_three_grades_success"
+        style="@style/item_style" />
+
+    <TextView
+        android:id="@+id/tv_three_grades_total"
+        style="@style/item_style" />
+
+    <TextView
+        android:id="@+id/tv_three_grades_percentage"
+        style="@style/item_style" />
+
+    <TextView
+        android:id="@+id/tv_penalty_shot_success"
+        style="@style/item_style" />
+
+    <TextView
+        android:id="@+id/tv_penalty_shot_total"
+        style="@style/item_style" />
+
+    <TextView
+        android:id="@+id/tv_penalty_shot_percentage"
+        style="@style/item_style" />
+
+</LinearLayout>
