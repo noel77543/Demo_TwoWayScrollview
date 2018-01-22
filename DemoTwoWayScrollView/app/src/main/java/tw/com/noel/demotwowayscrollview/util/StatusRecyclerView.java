@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 
 import tw.com.noel.demotwowayscrollview.implement.MyOnScrollListener;
@@ -20,6 +21,10 @@ public class StatusRecyclerView extends RecyclerView {
 
     private MemberRecyclerView memberRecyclerView;
     private CustomLayoutManager boxLinearLayoutManager;
+    private float downX = 0;
+    private float downY = 0;
+    private float scrolledX = 0;
+    private float scrolledY = 0;
 
     public StatusRecyclerView(Context context) {
         super(context);
@@ -86,8 +91,9 @@ public class StatusRecyclerView extends RecyclerView {
                     case MotionEvent.ACTION_UP:
                         if (recyclerView.getScrollY() == lastY) {
                             recyclerView.removeOnScrollListener(boxCustomScrollListener);
+                            boxLinearLayoutManager.setScrollEnabled(false);
                         }
-                        boxLinearLayoutManager.setScrollEnabled(false);
+
                         break;
                 }
             }
@@ -98,6 +104,75 @@ public class StatusRecyclerView extends RecyclerView {
             }
         });
     }
+
+//
+//    @Override
+//    public boolean dispatchTouchEvent(MotionEvent ev) {
+//        switch (ev.getAction()) {
+//            case MotionEvent.ACTION_DOWN:
+//                addOnScrollListener(boxCustomScrollListener);
+//                downX = ev.getX();
+//                downY = ev.getY();
+//                break;
+//            case MotionEvent.ACTION_MOVE:
+//
+//
+//                scrolledX = Math.abs(downX - ev.getX());
+//                scrolledY = Math.abs(downY - ev.getY());
+//                double hypotenuse = Math.sqrt(scrolledX * scrolledX + scrolledY * scrolledY);//畢氏定理
+//                int angle = Math.round((float) (Math.asin(scrolledY / hypotenuse) / Math.PI * 180));//角度
+//
+////                if (angle > 45) {
+////                    Log.e("滾動", "垂直");
+////                    addOnScrollListener(boxCustomScrollListener);
+////                } else {
+//
+//                    if (angle <= 45) {
+//                        Log.e("滾動", "水平");
+//                        removeOnScrollListener(boxCustomScrollListener);
+//                    }
+//                    break;
+////                }
+//            case MotionEvent.ACTION_UP:
+//                break;
+//        }
+//
+//
+//        return super.dispatchTouchEvent(ev);
+//    }
+
+//    @Override
+//    public boolean onTouchEvent(MotionEvent ev) {
+//        switch (ev.getAction()) {
+//            case MotionEvent.ACTION_DOWN:
+//                downX = ev.getX();
+//                downY = ev.getY();
+//                break;
+//            case MotionEvent.ACTION_MOVE:
+//
+//
+//                scrolledX = Math.abs(downX - ev.getX());
+//                scrolledY = Math.abs(downY - ev.getY());
+//                double hypotenuse = Math.sqrt(scrolledX * scrolledX + scrolledY * scrolledY);//畢氏定理
+//                int angle = Math.round((float) (Math.asin(scrolledY / hypotenuse) / Math.PI * 180));//角度
+//
+//                if (angle > 45) {
+//                    Log.e("滾動", "垂直");
+//                    addOnScrollListener(boxCustomScrollListener);
+//                } else {
+//                if (angle <= 45) {
+//                    Log.e("滾動", "水平");
+//                    removeOnScrollListener(boxCustomScrollListener);
+//                }
+//                break;
+//                }
+//            case MotionEvent.ACTION_UP:
+//                break;
+//        }
+//
+//
+//        return super.onTouchEvent(ev);
+//    }
 
 
     //----------

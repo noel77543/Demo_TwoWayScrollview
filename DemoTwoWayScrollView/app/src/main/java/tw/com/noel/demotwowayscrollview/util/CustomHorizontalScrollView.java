@@ -2,6 +2,8 @@ package tw.com.noel.demotwowayscrollview.util;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.widget.HorizontalScrollView;
 
 /**
@@ -10,7 +12,10 @@ import android.widget.HorizontalScrollView;
 
 public class CustomHorizontalScrollView extends HorizontalScrollView {
 
+
     private onScrollViewScrollListener onScrollViewScrollListener = null;
+    private StatusRecyclerView statusRecyclerView;
+
 
     public CustomHorizontalScrollView(Context context) {
         super(context);
@@ -40,4 +45,18 @@ public class CustomHorizontalScrollView extends HorizontalScrollView {
         void onScrollChanged(CustomHorizontalScrollView scrollView, int x, int y, int oldx, int oldy);
     }
 
+    @Override
+    protected void onOverScrolled(int scrollX, int scrollY, boolean clampedX,boolean clampedY) {
+        super.onOverScrolled(scrollX, scrollY, clampedX, clampedY);
+        
+        getStatusRecyclerView().removeOnScrollListener(getStatusRecyclerView().getBoxCustomScrollListener());
+    }
+
+    public StatusRecyclerView getStatusRecyclerView() {
+        return statusRecyclerView;
+    }
+
+    public void setStatusRecyclerView(StatusRecyclerView statusRecyclerView) {
+        this.statusRecyclerView = statusRecyclerView;
+    }
 }

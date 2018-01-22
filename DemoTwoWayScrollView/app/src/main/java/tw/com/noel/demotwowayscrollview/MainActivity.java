@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MotionEvent;
+import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
@@ -27,6 +28,12 @@ public class MainActivity extends AppCompatActivity implements CustomHorizontalS
     private StatusRecyclerView statusRecyclerview;
     private CustomHorizontalScrollView scrollView;
 
+    private float downX = 0;
+    private float downY = 0;
+
+    private float scrollX = 0;
+    private float scrollY = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,12 +42,13 @@ public class MainActivity extends AppCompatActivity implements CustomHorizontalS
 
         memberRecyclerview = findViewById(R.id.recyclerview_member);
         statusRecyclerview = findViewById(R.id.recyclerview_status);
+        scrollView = findViewById(R.id.scrollView);
 
         memberRecyclerview.setStatusRecyclerview(statusRecyclerview);
         statusRecyclerview.setMemberRecyclerView(memberRecyclerview);
 
-        scrollView = findViewById(R.id.scrollView);
         scrollView.setOnScrollviewScrollListener(this);
+        scrollView.setStatusRecyclerView(statusRecyclerview);
 
         statusAdapter = new StatusAdapter(this);
         memberAdapter = new MemberAdapter(this);
@@ -52,6 +60,8 @@ public class MainActivity extends AppCompatActivity implements CustomHorizontalS
         addData();
 
     }
+
+
 
     //---
     // for test
@@ -71,7 +81,16 @@ public class MainActivity extends AppCompatActivity implements CustomHorizontalS
     @Override
     public void onScrollChanged(CustomHorizontalScrollView scrollView, int x, int y, int oldx, int oldy) {
 
-        memberRecyclerview.removeOnScrollListener(memberRecyclerview.getBoxCustomScrollListener());
+        Log.e("x",""+x);
+        Log.e("y",""+y);
+        Log.e("oldx",""+oldx);
+        Log.e("oldy",""+oldy);
+
+
+
+
+//
+//        memberRecyclerview.removeOnScrollListener(memberRecyclerview.getBoxCustomScrollListener());
         statusRecyclerview.removeOnScrollListener(statusRecyclerview.getBoxCustomScrollListener());
     }
 
