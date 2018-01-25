@@ -8,7 +8,6 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 
-import tw.com.noel.demotwowayscrollview.implement.MyOnScrollListener;
 
 /**
  * Created by noel on 2018/1/10.
@@ -16,15 +15,11 @@ import tw.com.noel.demotwowayscrollview.implement.MyOnScrollListener;
 
 public class StatusRecyclerView extends RecyclerView {
     private Context context;
-    private MyOnScrollListener boxCustomScrollListener;
+    private OnScrollListener onScrollListener;
     private int lastY;
 
     private MemberRecyclerView memberRecyclerView;
     private CustomLayoutManager boxLinearLayoutManager;
-    private float downX = 0;
-    private float downY = 0;
-    private float scrolledX = 0;
-    private float scrolledY = 0;
 
     public StatusRecyclerView(Context context) {
         super(context);
@@ -50,19 +45,9 @@ public class StatusRecyclerView extends RecyclerView {
      * 起始點
      */
     private void init() {
+        initScrollListener();
         boxLinearLayoutManager = new CustomLayoutManager(context, LinearLayoutManager.VERTICAL, false);
         setLayoutManager(boxLinearLayoutManager);
-
-        boxCustomScrollListener = new MyOnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                // member 滾動 status 跟著滾動
-                getMemberRecyclerView().scrollBy(dx, dy);
-
-            }
-        };
-
 
         addOnItemTouchListener(new OnItemTouchListener() {
             @Override
@@ -81,7 +66,7 @@ public class StatusRecyclerView extends RecyclerView {
                         if (getMemberRecyclerView().getScrollState() == RecyclerView.SCROLL_STATE_IDLE) {
                             // 紀錄另一個列表的y座標並對當前列表addOnScrollListener
                             lastY = recyclerView.getScrollY();
-                            recyclerView.addOnScrollListener(boxCustomScrollListener);
+                            recyclerView.addOnScrollListener(onScrollListener);
                         }
 
                         boxLinearLayoutManager.setScrollEnabled(true);
@@ -90,7 +75,7 @@ public class StatusRecyclerView extends RecyclerView {
                         break;
                     case MotionEvent.ACTION_UP:
                         if (recyclerView.getScrollY() == lastY) {
-                            recyclerView.removeOnScrollListener(boxCustomScrollListener);
+                            recyclerView.removeOnScrollListener(onScrollListener);
                             boxLinearLayoutManager.setScrollEnabled(false);
                         }
 
@@ -103,6 +88,25 @@ public class StatusRecyclerView extends RecyclerView {
 
             }
         });
+    }
+
+    private void initScrollListener() {
+        onScrollListener = new OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (newState == recyclerView.SCROLL_STATE_IDLE) {
+                    recyclerView.removeOnScrollListener(this);
+                }
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                // member 滾動 status 跟著滾動
+                getMemberRecyclerView().scrollBy(dx, dy);
+            }
+        };
     }
 
 //
@@ -187,8 +191,8 @@ public class StatusRecyclerView extends RecyclerView {
     }
 
 
-    public MyOnScrollListener getBoxCustomScrollListener() {
-        return boxCustomScrollListener;
+    public OnScrollListener getBoxCustomScrollListener() {
+        return onScrollListener;
     }
 
 }

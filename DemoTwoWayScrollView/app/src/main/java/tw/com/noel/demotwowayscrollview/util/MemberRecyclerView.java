@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
-import tw.com.noel.demotwowayscrollview.implement.MyOnScrollListener;
 
 /**
  * Created by noel on 2018/1/10.
@@ -15,11 +14,11 @@ import tw.com.noel.demotwowayscrollview.implement.MyOnScrollListener;
 
 public class MemberRecyclerView extends RecyclerView implements RecyclerView.OnItemTouchListener {
 
-    private MyOnScrollListener boxCustomScrollListener;
     private StatusRecyclerView statusRecyclerview;
     private int lastY;
     private Context context;
     private CustomLayoutManager boxLinearLayoutManager;
+    private OnScrollListener onScrollListener;
 
     public MemberRecyclerView(Context context) {
         super(context);
@@ -45,22 +44,34 @@ public class MemberRecyclerView extends RecyclerView implements RecyclerView.OnI
      * 起始點
      */
     private void init() {
+        initScrollListener();
         boxLinearLayoutManager = new CustomLayoutManager(context, LinearLayoutManager.VERTICAL, false);
         setLayoutManager(boxLinearLayoutManager);
 
-        boxCustomScrollListener = new MyOnScrollListener() {
+        addOnItemTouchListener(this);
+    }
+
+
+    private void initScrollListener() {
+        onScrollListener = new OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (newState == recyclerView.SCROLL_STATE_IDLE) {
+                    recyclerView.removeOnScrollListener(this);
+                }
+            }
+
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-
                 // member 滾動 status 跟著滾動
                 getStatusRecyclerview().scrollBy(dx, dy);
-
             }
         };
-
-        addOnItemTouchListener(this);
     }
+
+
 
     @Override
     public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
@@ -80,7 +91,7 @@ public class MemberRecyclerView extends RecyclerView implements RecyclerView.OnI
                 if (getStatusRecyclerview().getScrollState() == RecyclerView.SCROLL_STATE_IDLE) {
                     // 紀錄另一個列表的y座標並對當前列表addOnScrollListener
                     lastY = recyclerView.getScrollY();
-                    recyclerView.addOnScrollListener(boxCustomScrollListener);
+                    recyclerView.addOnScrollListener(onScrollListener);
                 }
                 boxLinearLayoutManager.setScrollEnabled(true);
                 break;
@@ -88,7 +99,7 @@ public class MemberRecyclerView extends RecyclerView implements RecyclerView.OnI
                 break;
             case MotionEvent.ACTION_UP:
                 if (recyclerView.getScrollY() == lastY) {
-                    recyclerView.removeOnScrollListener(boxCustomScrollListener);
+                    recyclerView.removeOnScrollListener(onScrollListener);
                 }
                 boxLinearLayoutManager.setScrollEnabled(false);
                 break;
@@ -109,7 +120,7 @@ public class MemberRecyclerView extends RecyclerView implements RecyclerView.OnI
         this.statusRecyclerview = statusRecyclerview;
     }
 
-    public MyOnScrollListener getBoxCustomScrollListener() {
-        return boxCustomScrollListener;
+    public OnScrollListener getBoxCustomScrollListener() {
+        return onScrollListener;
     }
 }
