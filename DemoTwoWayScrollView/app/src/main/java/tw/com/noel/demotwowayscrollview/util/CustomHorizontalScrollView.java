@@ -44,11 +44,10 @@ public class CustomHorizontalScrollView extends HorizontalScrollView {
     public interface onScrollViewScrollListener {
         void onScrollChanged(CustomHorizontalScrollView scrollView, int x, int y, int oldx, int oldy);
     }
-
+    //邊界滾動時 移除監聽
     @Override
     protected void onOverScrolled(int scrollX, int scrollY, boolean clampedX,boolean clampedY) {
         super.onOverScrolled(scrollX, scrollY, clampedX, clampedY);
-        
         getStatusRecyclerView().removeOnScrollListener(getStatusRecyclerView().getBoxCustomScrollListener());
     }
 

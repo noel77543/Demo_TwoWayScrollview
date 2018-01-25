@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import tw.com.noel.demotwowayscrollview.R;
 import tw.com.noel.demotwowayscrollview.model.Box;
 
@@ -35,7 +37,7 @@ public class MemberAdapter extends RecyclerView.Adapter<MemberAdapter.ViewHolder
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_box_member, parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_box_member, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
@@ -53,14 +55,16 @@ public class MemberAdapter extends RecyclerView.Adapter<MemberAdapter.ViewHolder
         return boxes.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView textView;
-        private LinearLayout layout;
 
-        public ViewHolder(View view) {
+    class ViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.textView)
+        TextView textView;
+        @BindView(R.id.layout)
+        LinearLayout layout;
+
+        ViewHolder(View view) {
             super(view);
-            this.textView = view.findViewById(R.id.textView);
-            this.layout = view.findViewById(R.id.layout);
+            ButterKnife.bind(this, view);
         }
     }
 }
